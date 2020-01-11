@@ -1,5 +1,12 @@
 <template>
-  <div>问答</div>
+  <div class="container">
+    <div class="split"></div>
+    <van-skeleton avatar title :row="3" />
+    <div class="split"></div>
+    <van-skeleton avatar title :row="3" />
+     <div class="split"></div>
+    <van-skeleton avatar title :row="3" />
+  </div>
 </template>
 
 <script>

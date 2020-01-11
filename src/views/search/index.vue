@@ -1,5 +1,8 @@
 <template>
-  <div>搜索</div>
+  <div class="container">
+    <!-- back 返回上一个页面 -->
+    <van-nav-bar left-arrow title="搜索中心" @click-left="$router.back()"></van-nav-bar>
+  </div>
 </template>
 
 <script>

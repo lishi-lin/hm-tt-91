@@ -1,14 +1,15 @@
 <template>
   <div class="container">
      <!-- 可以采用vant的导航组件 来实现 -->
-    <van-nav-bar title="黑马头条" right-text="搜索" @click-right="$router.push('/search')"></van-nav-bar>
+    <van-nav-bar title="黑马头条" right-text="搜索" fixed @click-right="$router.push('/search')" v-if="!showNavBav"></van-nav-bar>
     <!-- 需要绑定属性操作黑马头条显示也隐藏 -->
     <!-- :class="{ 名称: 布尔值 }" -->
-    <div class="my-wrapper" :class="{noTop : !showNavBav}">
+    <div class="my-wrapper" :class="{noTop : showNavBav}">
       <!-- 二级路由容器 -->
       <router-view></router-view>
     </div>
     <!-- 底部标签栏 -->
+    <!-- 标签栏  开启路由模式 route :route="true"(布尔)  route="true"(字符串)-->
     <van-tabbar route>
       <!-- router-link  to  -->
       <van-tabbar-item to="/" icon="home-o">首页</van-tabbar-item>
@@ -23,8 +24,9 @@
 export default {
   name: 'layout',
   computed: {
+    // 判断用户中标题的隐藏
     showNavBav () {
-      return this.$route.path !== '/user'
+      return this.$route.path === '/user'
     }
   }
 
