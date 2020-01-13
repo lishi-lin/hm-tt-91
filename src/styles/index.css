@@ -14,6 +14,25 @@ ul {
   height: 100%;
   font-size: 14px;
 }
+.van-nav-bar {
+  background: #3296fa;
+}
+.van-nav-bar .van-nav-bar__title {
+  color: #fff;
+}
+.van-nav-bar .van-nav-bar__text {
+  color: #fff;
+  font-size: 12px;
+}
+.van-nav-bar .van-icon {
+  color: #fff;
+}
+.van-tabbar {
+  background: #fdfdfd;
+}
+.van-nav-bar__text:active {
+  background: transparent;
+}
 .split {
   height: 20px;
 }
