@@ -6,5 +6,5 @@ export function login (data) {
     url: '/authorizations',
     data,
     method: 'post'
-  }) //  得到一个promise对象  返回
+  }) // 得到一个promise对象  返回
 }
