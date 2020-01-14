@@ -3,11 +3,11 @@
 import axios from 'axios'
 import JSONBig from 'json-bigint' // 处理大数字插件
 import store from '@/store'
-import router from '@router'
+import router from '@/router'
 
 // 创建一个新的插件实例
 const instance = axios.create({
-  baseURL: 'http://ttapi.research.itcast.cn/', // 配置基准地址
+  baseURL: 'http://ttapi.research.itcast.cn/app/v1_0', // 配置基准地址
   // transformResponse转化原始数据（json格式字符窜）
   transformResponse: [function (data) {
     // transform 是。。。转化
@@ -50,7 +50,7 @@ instance.interceptors.response.use(response => {
   } catch (error) {
     return response.data
   }
-}, error => {
+}, async error => {
   // 响应错误的时候 token容易失效 处理token失效的问题
   // 如何判断token失效
   // error  => config (当前请求 的配置) request(请求) response(响应)
@@ -59,15 +59,16 @@ instance.interceptors.response.use(response => {
     // 判断响应状态吗是否等于401， 如果等于401在判断有没有refresh_token
     let toPath = { path: '/login', query: { redirectUrl: router.currentRoute.path } }
     // toPath获取当前页面地址 跳转到回登录页
-    // 如果有refresh_token
+    // 表示token过期  判断有没有refresh_token
     if (store.state.user.refresh_token) {
       try {
-        let result = axios({
+        let result = await axios({
           url: 'http://ttapi.research.itcast.cn/app/v1_0/authorizations',
-          method: 'put',
-          headers: { Authorization: `Bearer ${store.state.user.refresh_token}` }
+          headers: { Authorization: `Bearer ${store.state.user.refresh_token}` },
+          method: 'put'
         })
-        store.commit('updataUser', {
+
+        store.commit('updateUser', {
           user: {
             token: result.data.data.token, // axios发送数据拿到新token重新赋值
             refresh_token: store.state.user.refresh_token // 将新的refresh_token覆盖以前的
