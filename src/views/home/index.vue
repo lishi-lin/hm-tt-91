@@ -5,10 +5,10 @@
       <van-tab :title="channel.name" v-for="channel in channels" :key="channel.id">
         <!-- 这里注意 这个div设置了滚动条 目的是 给后面做 阅读记忆 留下伏笔 -->
         <!-- 阅读记忆 => 看文章看到一半 滑到中部 去了别的页面 当你回来时 文章还在你看的位置 -->
-        <article-list></article-list>
+        <article-list :channel_id="channel.id"></article-list>
         <div class='scroll-wrapper'>
           <van-cell-group>
-            <van-cell v-for="obj in 20" :key="obj" :title="item"></van-cell>
+            <van-cell v-for="obj in 20" :key="obj" :title="obj"></van-cell>
           </van-cell-group>
         </div>
       </van-tab>

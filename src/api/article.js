@@ -1,5 +1,6 @@
 // 文章获取数据
 import request from '@/utils/request'
+// 封装渲染列表的方法
 export function getArticles (params) {
   return request({
     /**
