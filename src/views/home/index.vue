@@ -13,19 +13,26 @@
         </div>
       </van-tab>
     </van-tabs>
-    <span class="bar_btn">
+    <!-- 显示编辑频道的图标 -->
+    <span class="bar_btn" @click="showchanneledit=true">
       <van-icon name="wap-nav" />
     </span>
+    <!-- 放置弹层组件 -->
+    <van-action-sheet :round="false" title="编辑频道" v-model="showchanneledit">
+      <!-- 放置频道编辑组件 -->
+      <channel-edit></channel-edit>
+    </van-action-sheet>
   </div>
 </template>
 
 <script>
 import { getMyChannels } from '@/api/channels'
 import ArticleList from './components/article-list'
+import ChannelEdit from './components/channel-edit'
 export default {
   name: 'home', // devtools查看组件时  可以看到 对应的name名称
   components: {
-    ArticleList
+    ArticleList, ChannelEdit
   },
   created () {
     this.getMyChannels()
@@ -33,7 +40,8 @@ export default {
   data () {
     return {
       activeIndex: 0, // 默认启动第0 个标签
-      channels: [] // 频道需要的数据
+      channels: [], // 频道需要的数据
+      showchanneledit: false // 编辑频道的显隐藏
     }
   },
   methods: {
@@ -101,6 +109,18 @@ export default {
     z-index: 1000;
     &::before {
       font-size: 20px;
+    }
+  }
+}
+// 编辑频道组件显示样式
+.van-action-sheet {
+  max-height: 100%;
+  height: 100%;
+  .van-action-sheet__header {
+    background: #3296fa;
+    color: #fff;
+    .van-icon-close {
+      color: #fff;
     }
   }
 }

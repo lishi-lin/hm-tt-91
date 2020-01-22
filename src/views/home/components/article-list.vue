@@ -24,7 +24,9 @@
               <span>{{item.comm_count}}评论</span>
               <!-- 使用过滤器   表达式 |  过滤器名称-->
               <span>{{item.pubdate | relTime}}</span>
-              <span class="close">
+              <!-- 判断是否显示叉号图标 -->
+
+              <span class="close" v-if="user.token">
                 <van-icon name="cross"></van-icon>
               </span>
             </div>
@@ -36,7 +38,9 @@
 </template>
 
 <script>
+
 import { getArticles } from '@/api/article' // 获取文章列表数据
+import { mapState } from 'vuex'
 export default {
   name: 'articles',
   data () {
@@ -48,6 +52,10 @@ export default {
       refreshSuccessText: '更新成功', // 文本
       timestamp: null // 时间戳  用来告诉服务器 现在我要求什么样的时间的数据
     }
+  },
+  // 映射vuex中的store对象到计算属性上
+  computed: {
+    ...mapState(['user'])
   },
   // pros可以对象传参数也可以数组传参数
   props: {
