@@ -20,7 +20,8 @@
     <!-- 放置弹层组件 -->
     <van-action-sheet :round="false" title="编辑频道" v-model="showchanneledit">
       <!-- 放置频道编辑组件 -->
-      <channel-edit :channels="channels"></channel-edit>
+      <!-- 父组件监听选择频道事件 -->
+      <channel-edit :channels="channels" @selectChannel="seChannel"></channel-edit>
     </van-action-sheet>
   </div>
 </template>
@@ -50,6 +51,12 @@ export default {
       let data = await getMyChannels()
       this.channels = data.channels
       // console.log(data)
+    },
+    // 切换对应的频道  关闭弹层
+    seChannel (id) {
+      const index = this.channels.findIndex(item => item.id === id) // 获取切换频道的索引
+      this.activeIndex = index // 将他不是 激活标签切换到对应的标签下
+      this.showchanneledit = false
     }
   }
 
