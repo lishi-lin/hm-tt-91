@@ -10,7 +10,7 @@
       <!-- 可选频道 -->
       <van-grid class="van-hairline--left">
         <van-grid-item v-for="(channel,i) in channels" :key="channel.id">
-          <span class="f12" @click="$emit('selectChannel',channel.id)">{{channel.name}}</span>
+          <span class="f12" :class="{red: i === activeIndex}" @click="$emit('selectChannel',channel.id)">{{channel.name}}</span>
           <!-- 通过编辑状态来控制叉号显示隐藏 -->
           <template v-if="i!== 0">
             <!-- 先控制频道是否等于0，在控制叉号显示隐藏 这样语义更好-->
@@ -46,7 +46,10 @@ export default {
     // 接收数据 我的频道
     channels: {
       type: Array,
-      default: () => [] //    eslint 要求我们必须用一个函数来生名一个数组函数
+      default: () => [] //    eslint 要求我们必须用一个函数来声明组函数
+    },
+    activeIndex: {
+      type: Number
     }
   },
   methods: {
