@@ -14,7 +14,7 @@
           <!-- 通过编辑状态来控制叉号显示隐藏 -->
           <template v-if="i!== 0">
             <!-- 先控制频道是否等于0，在控制叉号显示隐藏 这样语义更好-->
-               <van-icon v-show="editing" class="btn" name="cross"></van-icon>
+               <van-icon @click="$emit('delChannel',channel.id)" v-show="editing" class="btn" name="cross"></van-icon>
           </template>
           <!-- v-if 优先级大于v-show -->
           <!-- <van-icon v-if="i!== 0" v-show="editing" class="btn" name="cross"></van-icon> -->
