@@ -21,13 +21,13 @@
     <van-action-sheet :round="false" title="编辑频道" v-model="showchanneledit">
       <!-- 放置频道编辑组件 -->
       <!-- 父组件监听选择频道事件 -->
-      <channel-edit @delChannel="delChannel" :activeIndex="activeIndex" :channels="channels" @selectChannel="seChannel"></channel-edit>
+      <channel-edit @addChannel="addChannel" @delChannel="delChannel" :activeIndex="activeIndex" :channels="channels" @selectChannel="seChannel"></channel-edit>
     </van-action-sheet>
   </div>
 </template>
 
 <script>
-import { getMyChannels, delChannel } from '@/api/channels'
+import { getMyChannels, delChannel, addChannel } from '@/api/channels'
 import ArticleList from './components/article-list'
 import ChannelEdit from './components/channel-edit'
 export default {
@@ -75,9 +75,13 @@ export default {
       } catch (error) {
         this.$gnotify({ type: 'danger', message: '删除失败' })
       }
+    },
+    // 添加频道
+    async addChannel (channel) {
+      await addChannel(channel) // 完成写入本地缓存的操作   这只是写入数据
+      this.channels.push(channel) // 这步是修改data中的数据
     }
   }
-
 }
 </script>
 

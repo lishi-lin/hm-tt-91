@@ -49,11 +49,24 @@ export function delChannel (id) {
       channels.splice(index, 1)
       // 移除后的数据重新设置到缓存中
       localStorage.setItem(key, JSON.stringify(channels)) // 删除对应的索引 重新写入缓存
-      // 成功之后
-      resolve()
+
+      resolve() // 成功执行  如果不resolve 这个 promise永远不往下走
     } else {
       reject(new Error('找不到对应的频道'))
       // 失败之后
     }
+  })
+}
+// 添加频道
+// 添加频道  要添加id和名称  所以传个对象
+export function addChannel (channel) {
+  return new Promise(function (resolve, reject) {
+    // 添加逻辑
+    const key = store.state.user.token ? CACHE_CHANNEL_U : CACHE_CHANNEL_T // 用于缓存的key
+    const channels = JSON.parse(localStorage.getItem(key)) // 得到缓存结果一定是有数据的
+    channels.push(channel) // 将频道添加到队尾
+    // 重新写入缓存
+    localStorage.setItem(key, JSON.stringify(channels))
+    resolve() // 释放之后   才能拿到成功的代码
   })
 }
