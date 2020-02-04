@@ -12,3 +12,23 @@ export function getArticles (params) {
     params: { with_top: 1, ...params }
   })
 }
+// 获取文章搜索的建议
+export function suggestion (params) {
+  return request({
+    url: '/suggestion',
+    params
+  })
+}
+// 获取文章搜索结果
+export function serachArticle (params) {
+  return request({
+    url: 'search',
+    params
+  })
+}
+// 获取文章详情
+export function getArticleinfo (id) {
+  return request({
+    url: `/articles/${id}`
+  })
+}

@@ -9,7 +9,7 @@ const UserProfile = () => import('@/views/user/profile')
 const UserChat = () => import('@/views/user/chat')
 const Login = () => import('@/views/login')
 const Search = () => import('@/views/search')
-const SearchResult = () => import('@/views/search/searchresult')
+const Result = () => import('@/views/search/result')
 const Article = () => import('@/views/article')
 
 Vue.use(VueRouter)
@@ -29,7 +29,7 @@ const routes = [
   { path: '/chat', name: 'user-chat', component: UserChat },
   { path: '/login', name: 'login', component: Login },
   { path: '/search', name: 'search', component: Search },
-  { path: '/result', name: 'search-result', component: SearchResult },
+  { path: '/search/result', name: 'result', component: Result },
   { path: '/article', name: 'article', component: Article }
 
 ]

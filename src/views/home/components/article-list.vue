@@ -7,7 +7,7 @@
       <!-- 放置list组件可以实现 加载刷新 -->
       <van-list :finished="finished" finished-text="没有了" v-model="upLoading" @load="onLoad">
         <!-- 渲染数据 -->
-        <van-cell v-for="item in articles" :key="item.art_id.toString()">
+        <van-cell :to="`/article?id=${item.art_id.toString()}`" v-for="item in articles" :key="item.art_id.toString()">
           <div class="article_item">
             <h3 class="van-ellipsis">{{item.title}}</h3>
             <div class="img_box" v-if="item.cover.type === 3">
